@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WhatsApp Number Attack Tool">
+    <title>WA Number Crasher - Indonesia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>💀 WA NUMBER CRASHER</h1>
+                <p class="subtitle">Tool Penyerangan Nomor WhatsApp Lengkap</p>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">SIAP</span>
+            </div>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="card">
+                <h2><span class="icon">🎯</span> TARGET PENYERANGAN</h2>
+                <div class="input-group">
+                    <label for="targetNumber">Nomor WhatsApp Target</label>
+                    <div class="input-with-hint">
+                        <input type="text" id="targetNumber" placeholder="6281234567890" maxlength="15">
+                        <span class="hint">Format: 62xxxxxxxxxx (Indonesia)</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="attackType">Tipe Serangan</label>
+                    <select id="attackType">
+                        <option value="verifikasi_bomb">Bom Verifikasi</option>
+                        <option value="deeplink_flood">Deep Link Flood</option>
+                        <option value="vcard_corrupt">VCard Corrupt</option>
+                        <option value="multi_attack" selected>Serangan Multi-Vektor</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="intensity">Intensitas Serangan</label>
+                    <div class="slider-container">
+                        <input type="range" id="intensity" min="1" max="10" value="5">
+                        <div class="slider-labels">
+                            <span>Rendah</span>
+                            <span>Sedang</span>
+                            <span>Tinggi</span>
+                            <span>EKSTREM</span>
+                        </div>
+                        <div class="intensity-value">
+                            Level: <span id="intensityValue">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attack Options -->
+        <section class="options-section">
+            <h2><span class="icon">⚙️</span> OPSI SERANGAN</h2>
+            <div class="options-grid">
+                <div class="option-card" data-option="verifikasi">
+                    <div class="option-icon">💣</div>
+                    <h3>BOM VERIFIKASI</h3>
+                    <p>Kirim request verifikasi berulang untuk overload sistem</p>
+                    <div class="option-stats">
+                        <span>Efek: Tinggi</span>
+                        <span>Deteksi: Rendah</span>
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="deeplink">
+                    <div class="option-icon">🔗</div>
+                    <h3>DEEP LINK</h3>
+                    <p>Eksploitasi deep link WhatsApp dengan payload corrupt</p>
+                    <div class="option-stats">
+                        <span>Efek: Ekstrem</span>
+                        <span>Deteksi: Sedang</span>
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="vcard">
+                    <div class="option-icon">📇</div>
+                    <h3>VCARD CORRUPT</h3>
+                    <p>Buat file kontak corrupt untuk crash aplikasi</p>
+                    <div class="option-stats">
+                        <span>Efek: Medium</span>
+                        <span>Deteksi: Rendah</span>
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="api">
+                    <div class="option-icon">🌐</div>
+                    <h3>API FLOOD</h3>
+                    <p>Serangan DDoS ke API WhatsApp internal</p>
+                    <div class="option-stats">
+                        <span>Efek: Tinggi</span>
+                        <span>Deteksi: Tinggi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Control Panel -->
+        <section class="control-section">
+            <h2><span class="icon">🎮</span> PANEL KENDALI</h2>
+            <div class="control-buttons">
+                <button class="btn btn-start" id="startBtn">
+                    <span class="btn-icon">🚀</span>
+                    MULAI SERANGAN
+                </button>
+                <button class="btn btn-stop" id="stopBtn">
+                    <span class="btn-icon">⏹️</span>
+                    HENTIKAN
+                </button>
+                <button class="btn btn-generate" id="generateBtn">
+                    <span class="btn-icon">📁</span>
+                    BUAT FILE VCARD
+                </button>
+                <button class="btn btn-clear" id="clearBtn">
+                    <span class="btn-icon">🗑️</span>
+                    BERSIHKAN LOG
+                </button>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <div class="stat-label">Request Terkirim</div>
+                    <div class="stat-value" id="requestCount">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Waktu Aktif</div>
+                    <div class="stat-value" id="activeTime">00:00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-value" id="successRate">0%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Target Aktif</div>
+                    <div class="stat-value" id="currentTarget">-</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Log Section -->
+        <section class="log-section">
+            <div class="card">
+                <div class="log-header">
+                    <h2><span class="icon">📊</span> LOG SERANGAN</h2>
+                    <div class="log-controls">
+                        <button class="btn-small" onclick="exportLog()">📥 Export Log</button>
+                        <button class="btn-small" onclick="clearLog()">🗑️ Clear</button>
+                    </div>
+                </div>
+                <div class="log-container" id="logContainer">
+                    <div class="log-entry info">
+                        <span class="log-time">[00:00:00]</span>
+                        <span class="log-message">System initialized. Ready for attack.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚠️ <strong>PERINGATAN:</strong> Tool ini hanya untuk testing dan edukasi. Gunakan dengan tanggung jawab.</p>
+            <p class="copyright">WA Number Crasher v2.0 | © 2024 Indonesia Version</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="core.js"></script>
+    <script src="engine.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed'));
+        }
+    </script>
+</body>
+                  </html>
